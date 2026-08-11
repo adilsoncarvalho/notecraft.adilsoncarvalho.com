@@ -1,13 +1,7 @@
 ---
-import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n';
+import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import {
-  defaultLang,
-  getLangFromUrl,
-  languages,
-  localeKeys,
-  stripLangFromPath,
-} from '../i18n/config';
+import { defaultLang, getLangFromUrl, languages, localeKeys, stripLangFromPath } from '../i18n/config';
 import { useTranslations } from '../i18n/ui';
 import '../styles/global.css';
 
@@ -25,7 +19,6 @@ const { htmlLang, dir } = languages[lang];
 const path = stripLangFromPath(Astro.url.pathname);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const pageTitle = title === t('site.title') ? title : `${title} — ${t('site.title')}`;
-const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -63,35 +56,12 @@ const currentYear = new Date().getFullYear();
   </head>
 
   <body>
-    <a class="skip-link" href="#main">{t('nav.skipToContent')}</a>
-
-    <header class="site-header">
-      <div class="page site-header__inner">
-        <a class="site-header__brand" href={getRelativeLocaleUrl(lang, '')}>{t('site.title')}</a>
-        <nav class="site-nav" aria-label={t('nav.home')}>
-          <a href={getRelativeLocaleUrl(lang, '')}>{t('nav.home')}</a>
-          <a href={getRelativeLocaleUrl(lang, 'method')}>{t('nav.method')}</a>
-        </nav>
-        <LanguageSwitcher lang={lang} />
-      </div>
-    </header>
-
-    <main id="main" class="page">
+    <main>
       <slot />
     </main>
 
-    <footer class="site-footer">
-      <div class="page">
-        <ul>
-          <li><a href="https://astro.build">{t('footer.builtWith')}</a></li>
-          <li>
-            <a href="https://github.com/adilsoncarvalho/notecraft.adilsoncarvalho.com">
-              {t('footer.sourceCode')}
-            </a>
-          </li>
-        </ul>
-        <p>© {currentYear} Adilson Carvalho. {t('footer.rights')}</p>
-      </div>
+    <footer>
+      <LanguageSwitcher lang={lang} />
     </footer>
   </body>
 </html>

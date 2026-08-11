@@ -35,11 +35,13 @@ paths return a real 404, and `hreflang` on the live pages cross-links the locale
 
 ## Milestone 2 — The actual method
 
-Replace placeholder prose with the real method. This is the milestone that matters; the rest
-is scaffolding around it.
+The site is deliberately a placeholder: one page per locale reading `notecraft (soon)`. The
+scaffolding prose written during Milestone 0 was removed rather than left to be mistaken for
+a draft. This milestone replaces the placeholder with the real method — it is the milestone
+that matters; the rest is scaffolding around it.
 
-- Move page bodies into Astro content collections with a typed frontmatter schema, so writing
-  is Markdown rather than markup
+- ✅ Page bodies moved into Astro content collections with a typed frontmatter schema, so
+  writing is Markdown rather than markup
 - Draft the method in English: capture, marking conventions, the weekly pass, filing
 - The margin-symbol system needs images or inline SVG — a notation is hard to describe in
   prose alone
@@ -96,8 +98,8 @@ Not committed. Recorded so they are decisions rather than drift.
 - **Newsletter.** Only worth it if Milestone 5 shows returning readers.
 - **Comments.** Adds moderation work and third-party JavaScript to a site whose selling point
   is neither. Default is no.
-- **More languages.** The structure supports it; adding one costs a `ui.ts` block and a pages
-  directory. Wait for evidence anyone wants it.
+- **More languages.** The structure supports it; adding one costs a `ui.ts` block, a Markdown
+  file per collection, and a pages directory. Wait for evidence anyone wants it.
 
 ## Standing decisions
 

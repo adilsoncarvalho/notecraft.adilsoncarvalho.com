@@ -1,11 +1,13 @@
 ---
-import HomeContent from '../components/HomeContent.astro';
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { useTranslations } from '../i18n/ui';
 
-const t = useTranslations('en');
+const entry = await getEntry('home', 'en');
+if (!entry) throw new Error("Missing content entry 'home/en'");
+
+const { Content } = await render(entry);
 ---
 
-<BaseLayout title={t('site.title')} description={t('site.description')}>
-  <HomeContent />
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <Content />
 </BaseLayout>

@@ -12,10 +12,7 @@ const t = useTranslations(defaultLang);
 <BaseLayout title={t('notFound.heading')} description={t('notFound.body')}>
   <meta slot="head" name="robots" content="noindex" />
 
-  <section class="hero">
-    <p class="hero__eyebrow">404</p>
-    <h1>{t('notFound.heading')}</h1>
-    <p class="hero__body">{t('notFound.body')}</p>
-    <a class="button" href={getRelativeLocaleUrl(defaultLang, '')}>{t('notFound.cta')}</a>
-  </section>
+  <h1>404</h1>
+  <p>{t('notFound.body')}</p>
+  <p><a href={getRelativeLocaleUrl(defaultLang, '')}>{t('notFound.cta')}</a></p>
 </BaseLayout>

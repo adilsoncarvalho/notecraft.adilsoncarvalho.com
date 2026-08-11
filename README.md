@@ -29,17 +29,23 @@ reads the same file in CI, so there is one pin rather than two that can drift.
 
 ```
 src/
-├── components/     Reusable markup; *Content.astro files hold shared page bodies
+├── components/       LanguageSwitcher
+├── content/
+│   └── home/         Page prose as Markdown, one file per locale
+├── content.config.ts Collection definitions and their frontmatter schema
 ├── i18n/
-│   ├── config.ts   Locale registry and URL helpers
-│   └── ui.ts       Every UI string, keyed by locale
-├── layouts/        BaseLayout: head, nav, footer, hreflang
-├── pages/          Routes. Top level is English; pt-br/ is Portuguese
-└── styles/         global.css — design tokens, light and dark
+│   ├── config.ts     Locale registry and URL helpers
+│   └── ui.ts         UI chrome strings, keyed by locale
+├── layouts/          BaseLayout: head, hreflang, footer
+├── pages/            Routes. Top level is English; pt-br/ is Portuguese
+└── styles/           global.css — design tokens, light and dark
 public/
-├── CNAME           The custom domain. Deleting it breaks the domain
+├── CNAME             The custom domain. Deleting it breaks the domain
 └── robots.txt
 ```
+
+The site is currently a placeholder — one page per locale reading `notecraft (soon)` from
+`src/content/home/`.
 
 ## Internationalisation
 
@@ -47,10 +53,11 @@ English is served from `/`, Brazilian Portuguese from `/pt-br/`. Routing is Astr
 i18n, configured in `astro.config.mjs`; `prefixDefaultLocale: false` is what keeps English
 un-prefixed.
 
-Page bodies live once in `src/components/*Content.astro` and read their strings from
-`src/i18n/ui.ts`, so a locale's page file is only a routing shell. Every route uses the same
-slug in both locales, which is what lets the language switcher and the `hreflang` tags map
-between them by swapping the prefix.
+Page prose lives in Markdown under `src/content/`, one file per locale, named for the locale
+it serves. A page file looks its content up by locale and renders it, so a locale's page file
+is only a routing shell. Chrome that sits outside a content entry — labels, the 404 — comes
+from `src/i18n/ui.ts` instead. Every route uses the same slug in both locales, which is what
+lets the language switcher and the `hreflang` tags map between them by swapping the prefix.
 
 ### Adding a language
 
@@ -58,7 +65,8 @@ between them by swapping the prefix.
 2. Add it to `languages` in `src/i18n/config.ts`.
 3. Add its block to `ui` in `src/i18n/ui.ts`. Missing keys are a build-time type error, not a
    blank space on the page.
-4. Create `src/pages/<locale>/` with one shell page per route.
+4. Add a Markdown file named for the locale to each collection under `src/content/`.
+5. Create `src/pages/<locale>/` with one shell page per route.
 
 ## Deployment
 

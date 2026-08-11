@@ -16,7 +16,6 @@ const path = stripLangFromPath(Astro.url.pathname);
 ---
 
 <nav class="lang-switcher" aria-label={t('lang.switcher.label')}>
-  <span class="lang-switcher__label" aria-hidden="true">{t('lang.switcher.label')}:</span>
   <ul class="lang-switcher__list">
     {
       localeKeys.map((locale) => (
