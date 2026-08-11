@@ -1,0 +1,21 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+// GitHub Pages serves the generated `404.html` for any unmatched path, which
+// means one page answers for every locale. It renders in the default locale.
+const t = useTranslations(defaultLang);
+---
+
+<BaseLayout title={t('notFound.heading')} description={t('notFound.body')}>
+  <meta slot="head" name="robots" content="noindex" />
+
+  <section class="hero">
+    <p class="hero__eyebrow">404</p>
+    <h1>{t('notFound.heading')}</h1>
+    <p class="hero__body">{t('notFound.body')}</p>
+    <a class="button" href={getRelativeLocaleUrl(defaultLang, '')}>{t('notFound.cta')}</a>
+  </section>
+</BaseLayout>

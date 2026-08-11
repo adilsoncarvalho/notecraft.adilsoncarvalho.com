@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const stages = [
+  { title: t('method.capture.title'), body: t('method.capture.body') },
+  { title: t('method.mark.title'), body: t('method.mark.body') },
+  { title: t('method.distil.title'), body: t('method.distil.body') },
+  { title: t('method.file.title'), body: t('method.file.body') },
+];
+---
+
+<section class="hero">
+  <h1>{t('method.heading')}</h1>
+  <p class="hero__body">{t('method.intro')}</p>
+</section>
+
+<section class="section">
+  {
+    stages.map((stage, index) => (
+      <article class="stage">
+        <p class="stage__number">
+          {t('method.stage')} {index + 1}
+        </p>
+        <h2>{stage.title}</h2>
+        <p>{stage.body}</p>
+      </article>
+    ))
+  }
+</section>

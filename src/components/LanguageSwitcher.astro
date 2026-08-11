@@ -1,0 +1,36 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages, localeKeys, stripLangFromPath, type Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// The equivalent page in each locale, which holds because every route uses the
+// same slug across locales. Localised slugs would need a route map instead.
+const path = stripLangFromPath(Astro.url.pathname);
+---
+
+<nav class="lang-switcher" aria-label={t('lang.switcher.label')}>
+  <span class="lang-switcher__label" aria-hidden="true">{t('lang.switcher.label')}:</span>
+  <ul class="lang-switcher__list">
+    {
+      localeKeys.map((locale) => (
+        <li>
+          <a
+            href={getRelativeLocaleUrl(locale, path)}
+            hreflang={languages[locale].htmlLang}
+            lang={languages[locale].htmlLang}
+            aria-current={locale === lang ? 'true' : undefined}
+          >
+            {languages[locale].label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

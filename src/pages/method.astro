@@ -1,0 +1,11 @@
+---
+import MethodContent from '../components/MethodContent.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<BaseLayout title={t('method.heading')} description={t('method.intro')}>
+  <MethodContent />
+</BaseLayout>

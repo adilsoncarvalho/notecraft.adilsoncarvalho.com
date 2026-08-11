@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://notecraft.adilsoncarvalho.com/sitemap-index.xml
