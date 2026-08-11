@@ -17,11 +17,16 @@ the build output is a plain directory and would move without changes to the site
 
 ## One-time repository setup
 
-1. **Settings → Pages → Build and deployment → Source: GitHub Actions.** Without this the
-   deploy workflow fails at the `deploy-pages` step.
-2. **Settings → Pages → Custom domain:** `notecraft.adilsoncarvalho.com`.
-   `public/CNAME` already carries this value into every build, so GitHub re-reads it on each
-   deploy. Deleting that file un-sets the domain.
+1. **Pages source must be GitHub Actions.** The deploy workflow sets this itself —
+   `configure-pages` runs with `enablement: true`, which provisions Pages when it is off.
+   If that step is ever removed, Pages has to be switched on under
+   **Settings → Pages → Build and deployment** first, or the workflow fails at
+   `configure-pages` with `Get Pages site failed`.
+2. **Custom domain:** `notecraft.adilsoncarvalho.com`. `public/CNAME` carries this value into
+   every build and GitHub applies it from the deployed artifact, so no manual setting is
+   required — but it lands a short while *after* the deploy job reports success. A custom
+   domain still reading as empty immediately after the first deploy is expected; check again
+   rather than setting it by hand.
 3. Once DNS resolves, tick **Enforce HTTPS**. It stays greyed out until GitHub has issued the
    certificate, which takes a few minutes after the record propagates.
 

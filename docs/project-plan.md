@@ -21,20 +21,17 @@ works end to end.
 **Exit criteria:** `pnpm check` and `pnpm build` both clean; every route generated in both
 locales; cross-locale links resolve to the matching page.
 
-## Milestone 1 — Live on the domain
+## Milestone 1 — Live on the domain ✅ (2026-08-11)
 
 The site reachable at its address over HTTPS, deployed by the pipeline rather than by hand.
 
-- Push `master` to `adilsoncarvalho/notecraft.adilsoncarvalho.com`
-- Repository setup and the Route 53 `CNAME` record — steps in
-  [`hosting-and-dns.md`](hosting-and-dns.md)
-- Confirm the deploy workflow publishes, then enable **Enforce HTTPS**
+- `master` pushed to `adilsoncarvalho/notecraft.adilsoncarvalho.com`
+- Pages serving from GitHub Actions; the workflow provisions Pages itself via
+  `configure-pages`, so the repository does not depend on a manual settings change
+- Route 53 `CNAME`, custom domain, and enforced HTTPS all live
 
-**Exit criteria:** `https://notecraft.adilsoncarvalho.com` and its `/pt-br/` counterpart both
-serve over HTTPS, and a commit to `master` is live without manual steps.
-
-**Risk:** DNS propagation gates GitHub's certificate issuance. Make the DNS change first and
-expect a wait before HTTPS can be enforced.
+**Exit criteria met:** both locales serve 200 over HTTPS, HTTP redirects to HTTPS, unmatched
+paths return a real 404, and `hreflang` on the live pages cross-links the locales correctly.
 
 ## Milestone 2 — The actual method
 
